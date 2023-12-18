@@ -1,0 +1,168 @@
+openapi: 3.0.3
+info:
+  title: API documentation for contact details - OpenAPI 3.0.3
+  description: |-
+    Swagger GCP assignment for contact details management
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: im.souvik.basu@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: contact-details
+    description: contact details
+paths:
+  /contact-details/update/{partnerKey}:
+    put:
+      tags:
+        - contact-details
+      summary: Update an existing contact details
+      description: Update an existing contact details by Id
+      parameters:
+        - name: partnerKey
+          in: path
+          description: ID of contact details to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      operationId: updateContactDetails
+      requestBody:
+        description: Update an existent contact details in the application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactDetails'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContactDetails'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetails'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContactDetails'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: address details not found
+        '405':
+          description: Validation exception
+  /contact-details/create:
+    post:
+      tags:
+        - contact-details
+      summary: Add a new contact details to the application
+      description: Add a new contact details to the application
+      operationId: addContactDetails
+      requestBody:
+        description: Create a new contact details in the application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactDetails'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ContactDetails'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/ContactDetails'
+        '405':
+          description: Invalid input
+  /contact-details/get/{partnerKey}:
+    get:
+      tags:
+        - contact-details
+      summary: Find contact details by ID
+      description: Returns a single contact details
+      operationId: getContactDetailsById
+      parameters:
+        - name: partnerKey
+          in: path
+          description: ID of contact details to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactDetails'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ContactDetails'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: contact details not found
+  /contact-details/delete/{partnerKey}:
+    delete:
+      tags:
+        - contact-details
+      summary: Deletes a contact details
+      description: delete a contact details
+      operationId: deleteContactDetails
+      parameters:
+        - name: partnerKey
+          in: path
+          description: ID of address details to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful deletion
+        '400':
+          description: Invalid value
+components:
+  schemas:
+    ContactDetails:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 111
+        partnerKey:
+          type: integer
+          format: int64
+          example: 1
+        email:
+          type: string
+          example: "abc@tcs.com"
+        mobile:
+          type: string
+          example: "9057340573"
+        telephone:
+          type: string
+          example: "03327340573"
+      xml:
+        name: ContactDetails
+  requestBodies:
+    ContactDetails:
+      description: Contact Details that needs to be added to the application
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContactDetails'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ContactDetails'
