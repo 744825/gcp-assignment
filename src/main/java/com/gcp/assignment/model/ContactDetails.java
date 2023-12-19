@@ -12,13 +12,10 @@ import javax.validation.constraints.*;
  * ContactDetails
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-18T22:22:59.470491500+05:30[Asia/Calcutta]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2023-12-19T21:19:53.818136800+05:30[Asia/Calcutta]")
 
 
 public class ContactDetails   {
-  @JsonProperty("id")
-  private Long id = null;
-
   @JsonProperty("partnerKey")
   private Long partnerKey = null;
 
@@ -30,25 +27,6 @@ public class ContactDetails   {
 
   @JsonProperty("telephone")
   private String telephone = null;
-
-  public ContactDetails id(Long id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-   **/
-  @Schema(example = "111", description = "")
-  
-    public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public ContactDetails partnerKey(Long partnerKey) {
     this.partnerKey = partnerKey;
@@ -136,8 +114,7 @@ public class ContactDetails   {
       return false;
     }
     ContactDetails contactDetails = (ContactDetails) o;
-    return Objects.equals(this.id, contactDetails.id) &&
-        Objects.equals(this.partnerKey, contactDetails.partnerKey) &&
+    return Objects.equals(this.partnerKey, contactDetails.partnerKey) &&
         Objects.equals(this.email, contactDetails.email) &&
         Objects.equals(this.mobile, contactDetails.mobile) &&
         Objects.equals(this.telephone, contactDetails.telephone);
@@ -145,7 +122,7 @@ public class ContactDetails   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, partnerKey, email, mobile, telephone);
+    return Objects.hash(partnerKey, email, mobile, telephone);
   }
 
   @Override
@@ -153,7 +130,6 @@ public class ContactDetails   {
     StringBuilder sb = new StringBuilder();
     sb.append("class ContactDetails {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    partnerKey: ").append(toIndentedString(partnerKey)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    mobile: ").append(toIndentedString(mobile)).append("\n");

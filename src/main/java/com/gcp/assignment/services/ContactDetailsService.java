@@ -22,16 +22,38 @@ public class ContactDetailsService {
 	public ContactDetailsEntity createContactDetailsEntity(ContactDetailsEntity ContactDetailsEntity) {
 		return ContactDetailsRepository.save(ContactDetailsEntity);
 	}
+
+	public ContactDetailsEntity getContactDetailsByPartnerKey(Long partnerKey) throws ContactDetailsNotFoundException {
+		Optional<ContactDetailsEntity> optionalContactDetailsEntity = ContactDetailsRepository.findByPartnerKey(partnerKey);
+		if(!optionalContactDetailsEntity.isEmpty()) {
+			return optionalContactDetailsEntity.get();
+		}else {
+			throw new ContactDetailsNotFoundException("ContactDetails not found with the partnerKey...");
+		}
+		
+	}
+
+		public ContactDetailsEntity updteContactDetails(Long partnerKey,ContactDetailsEntity ContactDetailsEntity) throws ContactDetailsNotFoundException {
+		Optional<ContactDetailsEntity> optionalContactDetailsEntity = ContactDetailsRepository.findByPartnerKey(partnerKey);
+		if(!optionalContactDetailsEntity.isEmpty()) {
+			return ContactDetailsRepository.save(ContactDetailsEntity);
+		}else {
+			throw new ContactDetailsNotFoundException("ContactDetails not found with the partnerKey...");
+		}
+		
+	}
+
 	@Transactional
 	public void deleteContactDetailsEntity(Long partnerKey) throws ContactDetailsNotFoundException{
 		Optional<ContactDetailsEntity> optionalContactDetailsEntity = ContactDetailsRepository.findByPartnerKey(partnerKey);
 		if(!optionalContactDetailsEntity.isEmpty()) {
 			ContactDetailsRepository.deleteByPartnerKey(partnerKey);
 		}else {
-			throw new ContactDetailsNotFoundException("ContactDetailsEntity not found with the id, please provide correct id...");
+			throw new ContactDetailsNotFoundException("Contact Details not found with the id, please provide correct id...");
 		}
 		
 	}
+
 
 
 }

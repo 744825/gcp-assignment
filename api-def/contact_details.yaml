@@ -137,10 +137,6 @@ components:
     ContactDetails:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 111
         partnerKey:
           type: integer
           format: int64
